@@ -34,11 +34,12 @@ public class TokenManager {
      */
     public String createToken(String username) {
         return Jwts.builder()
+                // 设置具体内容
                 .setSubject(username)
+                // 设置过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EFFECTIVE_TIME))
-                .signWith(SignatureAlgorithm.HS512, TOKEN_SIGN_KEY)
-                .compressWith(CompressionCodecs.GZIP)
-                .compact();
+                // 编码加密
+                .signWith(SignatureAlgorithm.HS512, TOKEN_SIGN_KEY).compressWith(CompressionCodecs.GZIP).compact();
     }
 
     /**
@@ -48,16 +49,14 @@ public class TokenManager {
      * @return 用户信息
      */
     public String getUserInfoFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(TOKEN_SIGN_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        return Jwts.parser().setSigningKey(TOKEN_SIGN_KEY).parseClaimsJws(token).getBody().getSubject();
     }
 
     /**
      * 移除token
+     *
      * @param token token
      */
-    public void removeToken(String token) { }
+    public void removeToken(String token) {
+    }
 }

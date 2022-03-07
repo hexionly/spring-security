@@ -2,6 +2,7 @@ package com.hsx.security.security;
 
 import com.hsx.utils.utils.MD5;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  * 密码处理
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author HEXIONLY
  * @date 2022/3/6 17:44
  */
+@Component
 public class DefaultPasswordEncode implements PasswordEncoder {
 
     public DefaultPasswordEncode() {

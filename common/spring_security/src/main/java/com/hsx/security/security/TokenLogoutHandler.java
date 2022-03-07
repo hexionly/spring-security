@@ -20,9 +20,9 @@ public class TokenLogoutHandler implements LogoutHandler {
 
     private TokenManager tokenManager;
 
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
-    public TokenLogoutHandler(TokenManager tokenManager, RedisTemplate redisTemplate) {
+    public TokenLogoutHandler(TokenManager tokenManager, RedisTemplate<String, Object> redisTemplate) {
         this.tokenManager = tokenManager;
         this.redisTemplate = redisTemplate;
     }

@@ -34,4 +34,8 @@ public class MD5 {
             throw new RuntimeException("MD5加密错误！！！" + e);
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println(encrypt("111111"));
+    }
 }

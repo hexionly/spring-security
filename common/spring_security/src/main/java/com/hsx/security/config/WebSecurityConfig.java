@@ -65,11 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling()
-                // 没有权限时，调用自定义未受权受理类
-                .authenticationEntryPoint(new UnauthEntryPoint())
-                // 关闭csrf
-                .and().csrf().disable()
+        // 关闭csrf
+        http.csrf().disable()
                 // 请求
                 .authorizeRequests()
                 // 权限
@@ -83,7 +80,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 认证
                 .addFilter(new TokenLoginFilter(tokenManager, redisTemplate, authenticationManager()))
                 // 权限
-                .addFilter(new TokenAuthenticationFilter(tokenManager, redisTemplate, authenticationManager())).httpBasic();
+                .addFilter(new TokenAuthenticationFilter(tokenManager, redisTemplate, authenticationManager())).httpBasic().and().exceptionHandling()
+                // 没有权限时，调用自定义未受权受理类
+                .authenticationEntryPoint(new UnauthEntryPoint());
     }
 
     /**

@@ -23,8 +23,8 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     /**
      * 普通用户使得权限查询
      *
-     * @param UserId
+     * @param userId
      * @return
      */
-    List<String> selectAllPermissionValueById(String UserId);
+    List<String> selectAllPermissionValueById(String userId);
 }

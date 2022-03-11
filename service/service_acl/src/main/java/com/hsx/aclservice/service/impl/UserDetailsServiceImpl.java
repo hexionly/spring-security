@@ -4,6 +4,8 @@ import com.hsx.aclservice.entity.UserInfo;
 import com.hsx.aclservice.service.PermissionService;
 import com.hsx.aclservice.service.UserInfoService;
 import com.hsx.security.entity.SecurityUser;
+import com.hsx.security.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,7 @@ import java.util.List;
  * @date 2022/3/7 16:41
  */
 @Service("userDetailsService")
+@Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -43,14 +46,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户不存在。");
         }
 
-        UserInfo curUserInfo = new UserInfo();
-        BeanUtils.copyProperties(userInfo, curUserInfo);
+        User curUser = new User();
+        BeanUtils.copyProperties(userInfo, curUser);
 
         // 根据用户查询权限列表
         List<String> permissionValueList = permissionService.selectPermissionValueByUserId(userInfo.getId());
 
         SecurityUser securityUser = new SecurityUser();
         securityUser.setPermissionValueList(permissionValueList);
+        securityUser.setCurrentUserInfo(curUser);
         return securityUser;
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2022/3/7 16:38
  */
 @SpringBootApplication
-@MapperScan(basePackages = {"com.hsx.aclservice.mapper"})
+@MapperScan(basePackages = "com.hsx.aclservice.mapper")
 @ComponentScan(basePackages = "com.hsx")
 @EnableDiscoveryClient
 public class SecurityApplication {
